@@ -6,7 +6,7 @@ services:
     image: 'redis:latest'
   nginx:
     restart:  always
-    buld:
+    build:
       dockerfile: Dockerfile.dev
       context: ./nginx
     ports:
@@ -40,4 +40,6 @@ services:
     volumes: 
       - /app/node_modules
       - ./worker:/app
-      
+    environment: 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379

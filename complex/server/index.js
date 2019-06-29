@@ -2,7 +2,7 @@ const keys = require('./keys');
 
 // Express App Setup
 const express = require('express');
-const badyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
@@ -35,7 +35,7 @@ const redisPublisher = redisClient.duplicate();
 
 // Express route handle
 app.get('/', (req, res) => {
-    res.send('hi');
+    res.send('Hi');
 });
 
 app.get('/values/all', async (req, res) => {
@@ -59,7 +59,7 @@ app.post('/values', async (req, res) => {
 
     redisClient.hset('values', index, 'Nothing yet!');
     redisPublisher.publish('insert', index);
-    pgClient.query('INSERT INTO values(nunber) VALUES($1)', [index]);
+    pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
 
     res.send({ working: true });
 });
